@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="JDD.js"></script>
+    <script src="JDD2.js"></script>
+    <script src="dataLoader.js"></script>
+    <link href="Kandi_Login.css" rel="stylesheet" type="text/css"/>
+    <script>
+        //creating global varibles for webpage
+        var theTime = new Date();
+        var tempTime = new Date();
+        var time_interval = 5000;
+        var last_iteration = 0;
+        var running = true;
+        var index = 0;
+        var timer;
+
+        //gets data into array
+        var data = getData();
+
+        //function to load display data
+        function updateDisplay() {
+            theTime = new Date;
+            var timeRead = data[index].time_seconds;
+
+            if(timeRead >= 10){
+                document.getElementById("data").rows["seconds"].innerHTML = dataRow("Time Elapsed", data[index].time_seconds, "seconds");
+                document.getElementById("data").rows["latitude"].innerHTML = dataRow("Latitude", data[index].latitude, " ");
+                document.getElementById("data").rows["longitude"].innerHTML = dataRow("Longitude", data[index].longitude, " ");
+                document.getElementById("data").rows["gps_altitude"].innerHTML = dataRow("GPS Altitude", data[index].gps_altitude, " ");
+                document.getElementById("data").rows["bmpSensor_altitude"].innerHTML = dataRow("BMP Sensor Altitude", data[index].bmpSensor_altitude, " ");
+                document.getElementById("data").rows["bmpSensor_pressure"].innerHTML = dataRow("BMP Sensor Pressure", data[index].bmpSensor_pressure, " ");
+                document.getElementById("data").rows["bmpSensor_temp"].innerHTML = dataRow("BMP Sensor Temperature", data[index].bmpSensor_temp, " ");
+                document.getElementById("data").rows["digSensor_temp"].innerHTML = dataRow("Dig Sensor Temperature", data[index].digSensor_temp, " ");
+                document.getElementById("data").rows["cssSensor_temp"].innerHTML = dataRow("CSS Sensor Temperature", data[index].cssSensor_temp, " ");
+                document.getElementById("data").rows["cssSensor_eCO2"].innerHTML = dataRow("CSS Sensor eCO2", data[index].cssSensor_eCO2, " ");
+                document.getElementById("data").rows["cssSensor_TVOC"].innerHTML = dataRow("CSS Sensor TVOC", data[index].cssSensor_TVOC, " ");
+                document.getElementById("data").rows["UV"].innerHTML = dataRow("UV", data[index].UV, " ");
+                document.getElementById("data").rows["accelX"].innerHTML = dataRow("Accel X", data[index].accelX, " ");
+                document.getElementById("data").rows["accelY"].innerHTML = dataRow("Accel Y", data[index].accelY, " ");
+                document.getElementById("data").rows["accelZ"].innerHTML = dataRow("Accel Z", data[index].accelZ, " ");
+                document.getElementById("data").rows["magneticX"].innerHTML = dataRow("Magnetic X", data[index].magneticX, " ");
+                document.getElementById("data").rows["magneticY"].innerHTML = dataRow("Magnetic Y", data[index].magneticY, " ");
+                document.getElementById("data").rows["magneticZ"].innerHTML = dataRow("Magnetic Z", data[index].magneticZ, " ");
+                document.getElementById("data").rows["gyroX"].innerHTML = dataRow("Gyro X", data[index].gyroX, " ");
+                document.getElementById("data").rows["gyroY"].innerHTML = dataRow("Gyro Y", data[index].gyroY, " ");
+                document.getElementById("data").rows["gyroZ"].innerHTML = dataRow("Gyro Z", data[index].gyroZ, " ");
+                if (index < 500){
+                    index++;
+                } else {
+                    index = 0;
+                }
+             }
+        }
+
+    </script>
+    <title>
+        Kandi Alexander' CSC102 Page <!--Title for code-->
+    </title>
+
+</head>
+<picture> 
+    <!--Allows my gif to be shown-->
+    <img src="file:///Users/kandilicious/Desktop/School%20Folders/CSC102/UATspaceLogo-2.jpeg" 
+    alt="UATspaceLogo" width="205" height="205">
+    
+    <img src="https://i.pinimg.com/originals/e8/ac/f3/e8acf353c62e02bcbd50859eb757718c.gif" 
+    alt="ArtGif" width="205" height="205">
+
+</picture>
+<body>
+    <table>
+        <td><h1>UAT Space Program</h1></td>
+    </table>
+    <table id="data" width="70%" border="2">
+        <thead>
+            <th>Data type</th>
+            <th>Reading</th>
+        </thead>
+        <tbody>
+           <tr id="seconds"></tr>
+           <tr id="latitude"></tr>
+           <tr id="longitude"></tr>
+           <tr id="gps_altitude"></tr>
+           <tr id="bmpSensor_altitude"></tr>
+           <tr id="bmpSensor_pressure"></tr>
+           <tr id="bmpSensor_temp"></tr>
+           <tr id="digSensor_temp"></tr>
+           <tr id="cssSensor_temp"></tr>
+           <tr id="cssSensor_eCO2"></tr>
+           <tr id="cssSensor_TVOC"></tr>
+           <tr id="UV"></tr>
+           <tr id="accelX"></tr>
+           <tr id="accelY"></tr>
+           <tr id="accelZ"></tr>
+           <tr id="magneticX"></tr>
+           <tr id="magneticY"></tr>
+           <tr id="magneticZ"></tr>
+           <tr id="gyroX"></tr>
+           <tr id="gyroY"></tr>
+           <tr id="gyroZ"></tr>
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <button id="startButton" class="button" onclick="start();">Start</button>
+    <button id="stopButton" class="button" onclick="stop();">Stop</button><br>
+    <br>
+    <p id="countDownTimer">Waiting to start...</p>
+    <br>
+    <br>
+    <button onclick="play_21();">Play 21!</button>
+    <p id="card1Res">Card 1...</p>
+    <p id="card2Res">Card 2...</p>
+    <p id="sum1Res">Sum...</p>
+    <p id="final1Res">Win, lose or draw...</p>
+    <br>
+    <br>
+
+    <script>
+        var fallLaunch = new Mission(75, 100, 25, "USS Knew", 31, "October", 2021, 5);
+        var springLaunch = new Mission(25, 50, 5, "Flow Bro", 12, "April", 2022, 3);   
+    </script>
+    <button class="button" onclick="launchFall();">Launch Fall Mission</button>
+    <button class="button" onclick="displayFall();">Display Fall Mission</button><br>
+    <button class="button" onclick="launchSpring();">Launch Spring Mission></button>
+    <button class="button" onclick="displaySpring();">Display Spring Mission</button>
+    <br>
+    <br>
+    <button class="lgButton" onclick="playStation();">Play SpaceStation Sounds</button><br>
+
+
+</body>
+
+</html>
